@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Game;
+use App\Team;
 use App\User;
 use Illuminate\Http\Request;
+use function Illuminate\Support\Facades\Log;
 
 class OverviewController extends Controller
 {
@@ -24,7 +27,16 @@ class OverviewController extends Controller
      */
     public function index()
     {
+        $games = Game::all()->sortBy('date');
         $users = User::all()->sortByDesc('points');
-        return view('overview')->with('players', $users);
+        $teams = Team::all()->mapWithKeys(function($item) {
+            return [$item['id'] => $item];
+        });
+
+        return view('overview')->with([
+            'players' => $users,
+            'games' => $games,
+            'teams' => $teams
+        ]);
     }
 }
