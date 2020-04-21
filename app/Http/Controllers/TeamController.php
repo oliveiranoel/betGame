@@ -29,7 +29,7 @@ class TeamController extends Controller
      */
     public function index()
     {
-        return view('team')->with('teams', Team::all());
+        return view('team.team')->with('teams', Team::all());
     }
 
     /**
@@ -72,7 +72,7 @@ class TeamController extends Controller
      */
     public function edit($id)
     {
-        return view('editTeam')->with('team', Team::all()->find($id));
+        return view('team.editTeam')->with('team', Team::all()->find($id));
     }
 
     /**

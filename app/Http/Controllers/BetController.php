@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Bet;
+use App\Game;
+use App\Team;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BetController extends Controller
 {
@@ -23,7 +28,17 @@ class BetController extends Controller
      */
     public function index()
     {
-        return view('bet');
+        $games = Game::all()->sortBy('date');
+        $users = User::all()->sortByDesc('points');
+        $teams = Team::all()->mapWithKeys(function($item) {
+            return [$item['id'] => $item];
+        });
+
+        return view('bet.bet')->with([
+            'players' => $users,
+            'games' => $games,
+            'teams' => $teams,
+        ]);
     }
 
     /**
@@ -78,7 +93,23 @@ class BetController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if($id == -1) {
+            $bet = Bet::create([
+                'user_id' => Auth::user()->id,
+                'game_id' => $request->input('gameid'),
+                'score1' => $request->input('score1'),
+                'score2' => $request->input('score2')
+            ]);
+            $bet->save();
+        }
+        else {
+            $bet = Bet::find($id);
+            $bet->score1 = $request->input('score1');
+            $bet->score2 = $request->input('score2');
+            $bet->save();
+        }
+
+        return redirect('/bet');
     }
 
     /**

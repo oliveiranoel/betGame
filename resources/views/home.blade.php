@@ -14,10 +14,8 @@
                     @endif
 
                     @if ( Auth::user() )
-                        <p>
-                            You are currently logged in as
-                            <span class="font-weight-bold font-italic">{{ Auth::user()->nickname }}</span>.
-                        </p>
+                        You are currently logged in as
+                        <span class="font-weight-bold font-italic">{{ Auth::user()->nickname }}</span>.
                     @endif
                 </div>
             </div>

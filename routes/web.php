@@ -23,6 +23,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/overview', 'OverviewController@index')->name('overview');
 
-Route::resource('bet', 'BetController')->name('index', 'bet');
-
+Route::resource('bet', 'BetController');
 Route::resource('team', 'TeamController');
+

@@ -34,8 +34,11 @@
                         <a class="dropdown-item" href="{{ route('overview') }}">
                             {{ __('Overview') }}
                         </a>
-                        <a class="dropdown-item" href="{{ route('bet') }}">
+                        <a class="dropdown-item" href="{{ route('bet.index') }}">
                             {{ __('Bet') }}
+                        </a>
+                        <a class="dropdown-item" href="{{ route('team.index') }}">
+                            {{ __('Team') }}
                         </a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ route('logout') }}"
