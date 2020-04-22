@@ -21,7 +21,13 @@
                                 <th scope="col">{{ __('Name') }}</th>
                                 <th scope="col">{{ __('Tournament Winner') }}</th>
                                 <th scope="col"></th>
-                                <th scope="col" class="text-right"><i class="fas fa-plus-circle" style="font-size: 20px"></i></th>
+                                <th scope="col" class="text-right">
+                                    <form method="GET" action="{{ route('team.create') }}">
+                                        @csrf
+                                        <button type="submit" class="btn btn-default p-0"><span class="fas fa-plus-circle" style="font-size: 20px"></span>
+                                        </button>
+                                    </form>
+                                </th>
                             </tr>
                             </thead>
                             <tbody>
@@ -39,7 +45,8 @@
                                     <td class="text-right">
                                         <form method="GET" action="{{ route('team.edit', [$team->id]) }}">
                                             @csrf
-                                            <button type="submit"><i class="fas fa-pencil-alt" style="font-size: 20px"></i></button>
+                                            <button type="submit" class="btn btn-default p-0"><span class="fas fa-pencil-alt"
+                                                                     style="font-size: 20px"></span></button>
                                         </form>
 
                                     </td>
@@ -47,7 +54,8 @@
                                         <form method="POST" action="{{ route('team.destroy', [$team->id]) }}">
                                             @method('delete')
                                             @csrf
-                                            <button type="submit"><i class="fas fa-trash-alt" style="font-size: 20px"></i></button>
+                                            <button type="submit" class="btn btn-default p-0"><span class="fas fa-trash-alt"
+                                                                     style="font-size: 20px"></span></button>
                                         </form>
                                     </td>
                                 </tr>

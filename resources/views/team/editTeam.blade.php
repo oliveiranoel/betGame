@@ -16,9 +16,21 @@
                         <form method="POST" action="{{ route('team.update', [$team->id]) }}">
                             @method('put')
                             @csrf
-                            <div class="form-group">
-                                <label for="name">Name</label>
-                                <input type="text" class="form-control" id="name" name="name" value="{{ $team->name }}">
+                            <div class="form-row align-items-center">
+                                <div class="col-8 mb-3">
+                                    <label class="sr-only" for="name">Name</label>
+                                    <input type="text" class="form-control" id="name" name="name"
+                                           value="{{ $team->name }}">
+                                </div>
+                                <div class="col-auto mb-3 ml-3">
+                                    <div class="form-check custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" id="tournamentWinner"
+                                               name="tournamentWinner" value="true" {{ $team->tournamentWinner == 1 ? 'checked' : ''}}>
+                                        <label class="custom-control-label" for="tournamentWinner">
+                                            Tournament Winner
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
                             <button type="submit" class="btn btn-primary">Save</button>
                             <a href="{{ route('team.index') }}" class="btn btn-secondary">Cancel</a>

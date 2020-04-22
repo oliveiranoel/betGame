@@ -16,7 +16,7 @@ class CreateTeamsTable extends Migration
         Schema::create('teams', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->boolean('tournamentWinner');
+            $table->boolean('tournamentWinner')->default(false);
             $table->timestamps();
         });
     }

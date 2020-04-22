@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Team;
 use Exception;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
-use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class TeamController extends Controller
@@ -35,39 +35,34 @@ class TeamController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function create()
     {
-        //
+        return view('team.newTeam');
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return \Illuminate\Http\Response
+     * @return Application|RedirectResponse|Redirector
      */
     public function store(Request $request)
     {
-        //
-    }
+        Team::create(
+            [
+                'name' => $request->input('name')
+            ]
+        );
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        return redirect('/team');
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return Factory|View
      */
     public function edit($id)
@@ -79,14 +74,15 @@ class TeamController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param  int  $id
+     * @param int $id
      * @return RedirectResponse|Redirector
      */
     public function update(Request $request, $id)
     {
-        $team = Team::all()->find($id);
+        $team = Team::findOrFail($id);
 
         $team->name = $request->input('name');
+        $team->tournamentWinner = $request->boolean('tournamentWinner');
         $team->save();
 
         return redirect('/team');
@@ -101,7 +97,7 @@ class TeamController extends Controller
      */
     public function destroy($id)
     {
-        Team::all()->find($id)->delete();
+        Team::findOrFail($id)->delete();
         return redirect('/team');
     }
 }
