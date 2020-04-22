@@ -37,12 +37,15 @@
                         <a class="dropdown-item" href="{{ route('bet.index') }}">
                             {{ __('Bet') }}
                         </a>
+                        @if ( Auth::user()->admin )
+                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ route('team.index') }}">
                             {{ __('Team') }}
                         </a>
                         <a class="dropdown-item" href="{{ route('game.index') }}">
                             {{ __('Game') }}
                         </a>
+                        @endif
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ route('logout') }}"
                            onclick="event.preventDefault();
