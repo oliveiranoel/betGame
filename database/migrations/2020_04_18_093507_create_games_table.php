@@ -16,8 +16,8 @@ class CreateGamesTable extends Migration
         Schema::create('games', function (Blueprint $table) {
             $table->id();
             $table->date('date');
-            $table->integer('score1');
-            $table->integer('score2');
+            $table->tinyInteger('score1')->default(0);
+            $table->tinyInteger('score2')->default(0);
             $table->bigInteger('team1_id')->unsigned();
             $table->bigInteger('team2_id')->unsigned();
             $table->timestamps();

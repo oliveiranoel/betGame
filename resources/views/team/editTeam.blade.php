@@ -18,11 +18,11 @@
                             @csrf
                             <div class="form-row align-items-center">
                                 <div class="col-8 mb-3">
-                                    <label class="sr-only" for="name">Name</label>
+                                    <label for="name">Name</label>
                                     <input type="text" class="form-control" id="name" name="name"
                                            value="{{ $team->name }}">
                                 </div>
-                                <div class="col-auto mb-3 ml-3">
+                                <div class="col-auto mt-3 ml-3">
                                     <div class="form-check custom-control custom-checkbox">
                                         <input class="custom-control-input" type="checkbox" id="tournamentWinner"
                                                name="tournamentWinner" value="true" {{ $team->tournamentWinner == 1 ? 'checked' : ''}}>

@@ -25,4 +25,5 @@ Route::get('/overview', 'OverviewController@index')->name('overview');
 
 Route::resource('bet', 'BetController');
 Route::resource('team', 'TeamController');
+Route::resource('game', 'GameController');
 

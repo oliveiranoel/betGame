@@ -67,7 +67,7 @@ class TeamController extends Controller
      */
     public function edit($id)
     {
-        return view('team.editTeam')->with('team', Team::all()->find($id));
+        return view('team.editTeam')->with('team', Team::findOrFail($id));
     }
 
     /**
