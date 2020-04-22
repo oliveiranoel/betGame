@@ -25,16 +25,27 @@
                                 <div class="col-auto mt-3 ml-3">
                                     <div class="form-check custom-control custom-checkbox">
                                         <input class="custom-control-input" type="checkbox" id="tournamentWinner"
-                                               name="tournamentWinner" value="true" {{ $team->tournamentWinner == 1 ? 'checked' : ''}}>
+                                               name="tournamentWinner"
+                                               value="true" {{ $team->tournamentWinner == 1 ? 'checked' : ''}}>
                                         <label class="custom-control-label" for="tournamentWinner">
                                             Tournament Winner
                                         </label>
                                     </div>
                                 </div>
                             </div>
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                             <button type="submit" class="btn btn-primary">Save</button>
                             <a href="{{ route('team.index') }}" class="btn btn-secondary">Cancel</a>
                         </form>
+
                     </div>
                 </div>
             </div>

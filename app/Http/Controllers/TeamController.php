@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Rules\tournamentWinnerRule;
 use App\Team;
 use Exception;
 use Illuminate\Contracts\Foundation\Application;
@@ -10,6 +11,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\View\View;
+use function GuzzleHttp\Promise\queue;
 
 class TeamController extends Controller
 {
@@ -83,6 +85,11 @@ class TeamController extends Controller
         $team = Team::findOrFail($id);
 
         $team->name = $request->input('name');
+
+        $request->validate([
+            'tournamentWinner' => [new tournamentWinnerRule]
+        ]);
+
         $team->tournamentWinner = $request->boolean('tournamentWinner');
         $team->save();
 
