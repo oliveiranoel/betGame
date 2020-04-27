@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Game;
+use App\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 
 class GameController extends Controller
@@ -88,6 +90,20 @@ class GameController extends Controller
         $game->score2 = $request->input('score2');
         $game->save();
 
+        $users = User::all();
+        $goalDifference = $game->score1 - $game->score2;
+        foreach ($users as $user) {
+            $bet = $user->bets->where('game_id', $game->id);
+
+            if ($bet->score1 == $game->score1 && $bet->score2 == $game->score2) {
+                $user->points = $user->points + 3;
+            } else if ($bet->score1 - $game->score2 == $goalDifference) {
+                $user->points = $user->points + 2;
+            } else if ($this->getWinner($game->score1, $game->score2) == $this->getWinner($bet->score1, $bet->score2)) {
+                $user->points = $user->points + 1;
+            }
+        }
+
         return redirect('/game');
     }
 
@@ -102,5 +118,15 @@ class GameController extends Controller
     {
         Game::findOrFail($id)->delete();
         return redirect('/game');
+    }
+
+    private function getWinner($score1, $score2) {
+        if ($score1 > $score2) {
+            return 1;
+        } else if ($score1 < $score2) {
+            return 2;
+        } else {
+            return 0;
+        }
     }
 }

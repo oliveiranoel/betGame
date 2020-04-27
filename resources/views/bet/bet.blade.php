@@ -26,7 +26,7 @@
                                                         {{ $teams[$game->team1_id]->name }}
                                                     </label>
                                                     <div class="col-md-2">
-                                                        <input id="score1" type="number" class="form-control" name="score1" value="{{ \App\Bet::bet( $game->id ) ? \App\Bet::bet( $game->id )->score1 : 0 }}" autocomplete="score1">
+                                                        <input id="score1" type="number" class="form-control" name="score1" value="{{ \App\Bet::bet( $game->id ) ? \App\Bet::bet( $game->id )->score1 : 0 }}" autocomplete="score1" {{ $game->date <= date('Y-m-d') ? 'disabled' : '' }}>
                                                     </div>
                                                 </div>
 
@@ -35,13 +35,13 @@
                                                         {{ $teams[$game->team2_id]->name }}
                                                     </label>
                                                     <div class="col-md-2">
-                                                        <input id="score2" type="number" class="form-control" name="score2" value="{{ \App\Bet::bet( $game->id ) ? \App\Bet::bet( $game->id )->score2 : 0 }}" autocomplete="score2">
+                                                        <input id="score2" type="number" class="form-control" name="score2" value="{{ \App\Bet::bet( $game->id ) ? \App\Bet::bet( $game->id )->score2 : 0 }}" autocomplete="score2" {{ $game->date <= date('Y-m-d') ? 'disabled' : '' }}>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group row">
                                                     <div class="col-md offset-md-4">
-                                                        <button type="submit" class="col-md-2 btn btn-primary">
+                                                        <button type="submit" class="col-md-2 btn btn-primary {{ $game->date <= date('Y-m-d') ? 'd-none' : '' }}">
                                                             {{ __('Save') }}
                                                         </button>
                                                     </div>

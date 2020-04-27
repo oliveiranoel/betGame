@@ -1,5 +1,6 @@
 <?php
 
+use App\Team;
 use App\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -25,6 +26,23 @@ class DatabaseSeeder extends Seeder
             'email' => 'dominik.suter@bbzsogr.ch',
             'password' =>  Hash::make('test05'),
             'admin' => true
+        ]);
+
+        User::create([
+            'nickname' => 'test',
+            'email' => 'test@test.ch',
+            'password' =>  Hash::make('test05'),
+            'admin' => false
+        ]);
+
+        Team::create([
+            'name' => 'Schweiz',
+            'tournamentWinner' => false
+        ]);
+
+        Team::create([
+            'name' => 'Portugal',
+            'tournamentWinner' => false
         ]);
     }
 }
