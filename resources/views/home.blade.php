@@ -22,7 +22,7 @@
             </div>
         </div>
         <div class="row mt-3">
-            <div class="col-sm-3">
+            <div class="col-sm">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Overview</h5>
@@ -31,7 +31,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Bet</h5>
@@ -40,7 +40,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-3">
+            @if ( Auth::user()->admin )
+            <div class="col">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Team</h5>
@@ -49,7 +50,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-3">
+            <div class="col">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Game</h5>
@@ -58,6 +59,7 @@
                     </div>
                 </div>
             </div>
+            @endif
         </div>
     </div>
 @endsection

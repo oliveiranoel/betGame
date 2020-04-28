@@ -4,7 +4,18 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
+            @if( $tournamentWinner )
             <div class="card">
+                <div class="card-header">{{__('Tournament Winner')}}</div>
+                <div class="card-body">
+                    <div>
+                        {{ $tournamentWinner->name }}
+                    </div>
+                </div>
+            </div>
+            @endif
+
+            <div class="card @if( $tournamentWinner ) mt-4 @endif">
                 <div class="card-header">{{__('Overview')}}</div>
                 <div class="card-body">
                     <div>
