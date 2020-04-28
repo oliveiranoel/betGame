@@ -95,12 +95,18 @@ class GameController extends Controller
         foreach ($users as $user) {
             $bet = $user->bets->where('game_id', $game->id);
 
-            if ($bet->score1 == $game->score1 && $bet->score2 == $game->score2) {
-                $user->points = $user->points + 3;
-            } else if ($bet->score1 - $game->score2 == $goalDifference) {
-                $user->points = $user->points + 2;
-            } else if ($this->getWinner($game->score1, $game->score2) == $this->getWinner($bet->score1, $bet->score2)) {
-                $user->points = $user->points + 1;
+            if (count($bet) > 0) {
+                $bet = $bet[0];
+                if ($bet->score1 == $game->score1 && $bet->score2 == $game->score2) {
+                    $user->points = $user->points + 3;
+                } else if ($bet->score1 - $bet->score2 == $goalDifference) {
+                    $user->points = $user->points + 2;
+                } else if ($this->getWinner($game->score1, $game->score2) == $this->getWinner($bet->score1, $bet->score2)) {
+                    $user->points = $user->points + 1;
+                }
+                $user->save();
+            } else {
+                error_log("Found multiple bets on same game.");
             }
         }
 
@@ -120,7 +126,8 @@ class GameController extends Controller
         return redirect('/game');
     }
 
-    private function getWinner($score1, $score2) {
+    private function getWinner($score1, $score2)
+    {
         if ($score1 > $score2) {
             return 1;
         } else if ($score1 < $score2) {
