@@ -55,7 +55,7 @@
                                             @method('delete')
                                             @csrf
                                             <button type="submit" class="btn btn-default p-0"><span class="fas fa-trash-alt"
-                                                                     style="font-size: 20px"></span></button>
+                                                                     style="font-size: 20px" onclick="return confirm('Are you sure?')"></span></button>
                                         </form>
                                     </td>
                                 </tr>
