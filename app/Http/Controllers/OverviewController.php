@@ -33,10 +33,19 @@ class OverviewController extends Controller
             return [$item['id'] => $item];
         });
 
+        $winner = Team::all()->where('tournamentWinner', true);
+        if ( count( $winner ) > 0 ) {
+            $winner = $winner[0];
+        }
+        else {
+            $winner = false;
+        }
+
         return view('overview')->with([
             'players' => $users,
             'games' => $games,
-            'teams' => $teams
+            'teams' => $teams,
+            'tournamentWinner' => $winner
         ]);
     }
 }
